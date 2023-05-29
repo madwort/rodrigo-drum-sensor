@@ -32,14 +32,18 @@ def equations_4(vars):
 # first pair have a good soln at (-0.0823, 0.0968), a near soln at (0.1153, 0.0436) & two other far solns...
 
 # we only want solutions in the upper-left quadrant, so seed the solver with a midpoint of that quadrant (outer corner of that quadrant may be a better choice - testing required)
+
+quadrant_starting_point = (-0.05,0.05)
+print(f"quadrant starting point: {quadrant_starting_point}")
+
 print("intersections:")
-x1,y1 = fsolve(equations_1, (-0.05,0.05))
+x1,y1 = fsolve(equations_1, quadrant_starting_point)
 print(x1,y1)
-x2,y2 = fsolve(equations_2, (-0.05,0.05))
+x2,y2 = fsolve(equations_2, quadrant_starting_point)
 print(x2,y2)
-x3,y3 = fsolve(equations_3, (-0.05,0.05))
+x3,y3 = fsolve(equations_3, quadrant_starting_point)
 print(x3,y3)
-x4,y4 = fsolve(equations_4, (-0.05,0.05))
+x4,y4 = fsolve(equations_4, quadrant_starting_point)
 print(x4,y4)
 
 x = (x1+x2+x3+x4)/4
