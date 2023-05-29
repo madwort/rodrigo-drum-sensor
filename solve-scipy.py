@@ -1,12 +1,11 @@
 
 from scipy.optimize import fsolve
 
-# equations:
-
-# NE (148x^2)-(305(y-.1)^2)=1
-# ES (540y^2)-(122(x-.1)^2)=1
-# SW (493x^2)-(125(y+.1)^2)=1
-# WN (156y^2)-(227(x+.1)^2)=1
+print("equations:")
+print("NE (148x^2)-(305(y-.1)^2)=1")
+print("ES (540y^2)-(122(x-.1)^2)=1")
+print("SW (493x^2)-(125(y+.1)^2)=1")
+print("WN (156y^2)-(227(x+.1)^2)=1")
 
 def equations_1(vars):
     x,y = vars
