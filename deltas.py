@@ -7,6 +7,8 @@ def min_position(my_list):
     my_min = min(my_list)
     for i,x in enumerate(deltas):
         if x == my_min:
+            # take the first among equals position
+            # TODO: do something more clever if there are multiple equal min positions
             return i
 
 print(min(deltas))
