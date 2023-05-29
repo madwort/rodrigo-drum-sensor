@@ -1,4 +1,6 @@
 deltas = [80, 1, 125, 83]
+quadrants = ["north", "east", "south", "west"]
+starting_positions = [(-0.5, 0.5), (0.5, 0.5), (0.5, -0.5), (-0.5, -0.5)]
 
 def min_position(my_list):
     """docstring for min_position"""
@@ -8,4 +10,7 @@ def min_position(my_list):
             return i
 
 print(min(deltas))
-print(min_position(deltas))
+my_i = min_position(deltas)
+print(my_i)
+print(f"{quadrants[my_i]} quadrant")
+print(f"starting position: {starting_positions[my_i]}")
