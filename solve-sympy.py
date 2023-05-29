@@ -15,16 +15,15 @@ equations = [(148*(x**2))-(305*((y-.1)**2))-1, (540*(y**2))-(122*((x-.1)**2))-1,
 
 # attempt to solve pairs of equations
 
-for x in range(0, 4):
-    print(f"pair {x}")
-    equation_1 = equations[x]
-    if x < 3:
-        equation_2 = equations[x+1]
+for my_x in range(0, 4):
+    print(f"pair {my_x}")
+    equation_1 = equations[my_x]
+    if my_x < 3:
+        equation_2 = equations[my_x+1]
     else:
         equation_2 = equations[0]
     try:
         solution = solve([equation_1, equation_2], x, y, dict=True)
         print(solution)
-        print((x,y))
     except Exception:
         print("could not solve")
