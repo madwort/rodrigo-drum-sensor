@@ -3,7 +3,7 @@ deltas = [80, 1, 125, 83]
 def _min_position(my_list):
     """docstring for min_position"""
     my_min = min(my_list)
-    for i,x in enumerate(deltas):
+    for i,x in enumerate(my_list):
         if x == my_min:
             # take the first among equals position
             # TODO: do something more clever if there are multiple equal min positions
