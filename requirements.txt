@@ -1,3 +1,4 @@
 sympy
 scipy
 numpy
+pytest
