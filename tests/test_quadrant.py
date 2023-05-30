@@ -1,5 +1,6 @@
 from drum_sensor import quadrant
 
+
 def test__min_position():
     deltas = [80, 1, 125, 83]
 
@@ -7,7 +8,7 @@ def test__min_position():
     my_i = quadrant._min_position(deltas)
     print(my_i)
     assert my_i == 1
-    
+
 
 def test_quadrant():
     deltas = [80, 1, 125, 83]
@@ -16,5 +17,3 @@ def test_quadrant():
 
     assert my_quadrant == "east"
     assert starting_position == (0.0505, 0.0505)
-
-    

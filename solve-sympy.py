@@ -11,7 +11,12 @@ from sympy.abc import x, y
 
 # first pair have a good soln at (-0.0823, 0.0968), a near soln at (0.1153, 0.0436) & two other far solns...
 
-equations = [(148*(x**2))-(305*((y-.1)**2))-1, (540*(y**2))-(122*((x-.1)**2))-1, (493*(x**2))-(125*((y+.1)**2))-1, (156*(y**2))-(227*((x+.1)**2))-1]
+equations = [
+    (148 * (x**2)) - (305 * ((y - 0.1) ** 2)) - 1,
+    (540 * (y**2)) - (122 * ((x - 0.1) ** 2)) - 1,
+    (493 * (x**2)) - (125 * ((y + 0.1) ** 2)) - 1,
+    (156 * (y**2)) - (227 * ((x + 0.1) ** 2)) - 1,
+]
 
 # attempt to solve pairs of equations
 
@@ -19,7 +24,7 @@ for pair in range(0, 4):
     print(f"pair {pair}")
     equation_1 = equations[pair]
     if pair < 3:
-        equation_2 = equations[pair+1]
+        equation_2 = equations[pair + 1]
     else:
         equation_2 = equations[0]
     try:

@@ -14,4 +14,4 @@ print(f"sensor-to-sensor distance: {distance}")
 x, y = calculate_point(time_deltas_samples, speed, distance)
 
 print("predicted point:")
-print(x,y)
+print(x, y)
