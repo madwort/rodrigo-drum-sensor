@@ -15,6 +15,9 @@ def calculate_point(time_deltas_samples, speed, distance):
 
     quadrant, quadrant_starting_point = find_quadrant(time_deltas_seconds, distance)
 
+    print(f"quadrant: {quadrant}")
+    print(f"quadrant starting point: {quadrant_starting_point}")
+
     a, b = _calculate_params(time_deltas_seconds[0], time_deltas_seconds[1], speed, distance)
     c, d = _calculate_params(time_deltas_seconds[1], time_deltas_seconds[2], speed, distance)
     e, f = _calculate_params(time_deltas_seconds[2], time_deltas_seconds[3], speed, distance)
@@ -47,23 +50,21 @@ def calculate_point(time_deltas_samples, speed, distance):
         return eqs
 
     # attempt to solve pairs of equations
-
-    print(f"quadrant: {quadrant}")
-    print(f"quadrant starting point: {quadrant_starting_point}")
+    x1,y1 = fsolve(equations_1, quadrant_starting_point)
+    x2,y2 = fsolve(equations_2, quadrant_starting_point)
+    x3,y3 = fsolve(equations_3, quadrant_starting_point)
+    x4,y4 = fsolve(equations_4, quadrant_starting_point)
 
     print("intersections:")
-    x1,y1 = fsolve(equations_1, quadrant_starting_point)
     print(x1,y1)
-    x2,y2 = fsolve(equations_2, quadrant_starting_point)
     print(x2,y2)
-    x3,y3 = fsolve(equations_3, quadrant_starting_point)
     print(x3,y3)
-    x4,y4 = fsolve(equations_4, quadrant_starting_point)
     print(x4,y4)
 
     x = (x1+x2+x3+x4)/4
-    print(f"sumx {(x1+x2+x3)}")
     y = (y1+y2+y3+y4)/4
+
     print(x,y)
+
     return (x, y)
 
