@@ -9,5 +9,11 @@ pip install virtualenv
 python -m virtualenv .venv
 souce .venv/bin/activate
 pip install -r requirements.txt
-python solve-scipy.py
+python predict_point.py
+```
+
+## how to run tests
+
+```bash
+pytest
 ```
