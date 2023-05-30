@@ -82,7 +82,7 @@ def calculate_point(time_deltas_samples, speed, distance):
     print("intersections:")
     print(solutions)
 
-    x,y = numpy.mean(solutions, axis=0)
+    x, y = numpy.mean(solutions, axis=0)
 
     print(x, y)
 
