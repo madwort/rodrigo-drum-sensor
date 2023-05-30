@@ -11,7 +11,7 @@ print(f"speed: {speed}m/s")
 distance = 0.202
 print(f"sensor-to-sensor distance: {distance}")
 
-x, y = calculate_point(time_deltas_samples, speed, distance)
+x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
-print("predicted point:")
-print(x, y)
+print(f"predicted point: ({x}, {y})")
+print(f"std: ({std_x}, {std_y})")

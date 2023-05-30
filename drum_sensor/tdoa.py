@@ -83,7 +83,9 @@ def calculate_point(time_deltas_samples, speed, distance):
     print(solutions)
 
     x, y = numpy.mean(solutions, axis=0)
+    std_x, std_y = numpy.std(solutions, axis=0)
 
-    print(x, y)
+    print(f"predicted point: ({x}, {y})")
+    print(f"std: ({std_x}, {std_y})")
 
-    return (x, y)
+    return (x, y, std_x, std_y)
