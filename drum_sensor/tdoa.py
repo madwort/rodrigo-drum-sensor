@@ -45,7 +45,9 @@ def calculate_point(time_deltas_samples, speed, distance):
 def calculate_point_crosscorrelate(time_deltas_samples, speed, distance):
     time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
 
-    quadrant, quadrant_starting_point = find_quadrant(time_deltas_seconds, distance)
+    # quadrant, quadrant_starting_point = find_quadrant(time_deltas_seconds, distance)
+    quadrant = "unknown"
+    quadrant_starting_point = (0.0, 0.0)
 
     print(f"quadrant: {quadrant}")
     print(f"quadrant starting point: {quadrant_starting_point}")
