@@ -25,9 +25,13 @@ def default_handler(address, *args):
 
     # TODO: don't do this in the handler ARGH!
     client_ip = "127.0.0.1"
-    client_port = 1338    
+    client_port = 1338
+    client_url = "/drum_sensor/calculated_point"
+
+    print(f"sending OSC message to {client_ip}:{client_port}{client_url}")
+
     client = SimpleUDPClient(client_ip, client_port)  # Create client
-    client.send_message("/drum_sensor/client", [x, y, std_x, std_y])
+    client.send_message("/drum_sensor/calculated_point", [x, y, std_x, std_y])
 
 
 dispatcher = Dispatcher()
