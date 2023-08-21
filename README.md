@@ -7,7 +7,7 @@ Try out solving equations!
 ```bash
 pip install virtualenv
 python -m virtualenv .venv
-souce .venv/bin/activate
+source .venv/bin/activate
 pip install -r requirements.txt
 python predict_point.py
 ```
