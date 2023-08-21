@@ -1,4 +1,4 @@
-from drum_sensor.tdoa import calculate_point
+from drum_sensor.tdoa import calculate_point, generate_coefficients, generate_coefficients_crosscorrelate
 
 import numpy
 import pytest
@@ -41,3 +41,14 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
     assert numpy.isclose(y, expected_y)
     assert numpy.isclose(std_x, expected_std_x)
     assert numpy.isclose(std_y, expected_std_y)
+
+
+def test_generate_coefficients():
+    speed = 82
+
+    #  in m
+    distance = 0.202
+
+    regular = generate_coefficients([0, 80, 125, 83], speed, distance)
+    new = generate_coefficients_crosscorrelate([80, 45, -42, -83], speed, distance)
+    assert regular == new

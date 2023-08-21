@@ -17,3 +17,22 @@ def test_quadrant():
 
     assert my_quadrant == "east"
     assert starting_position == (0.0505, 0.0505)
+
+
+def test_quadrant_2():
+    deltas = [0, 80, 125, 83]
+
+    my_quadrant, starting_position = quadrant.find_quadrant(deltas, 0.202)
+
+    assert my_quadrant == "north"
+    assert starting_position == (-0.0505, 0.0505)
+
+
+def test_quadrant_crosscorrelate():
+    # this should equal to [0, 80, 125, 83]
+    deltas = [80, 45, -42, -83]
+
+    my_quadrant, starting_position = quadrant.find_quadrant(deltas, 0.202)
+
+    assert my_quadrant == "north"
+    assert starting_position == (-0.0505, 0.0505)
