@@ -1,7 +1,8 @@
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import BlockingOSCUDPServer
+from pythonosc.udp_client import SimpleUDPClient
 
-from drum_sensor.tdoa import calculate_point
+from drum_sensor.tdoa import calculate_point_crosscorrelate
 
 
 def default_handler(address, *args):
@@ -22,6 +23,12 @@ def default_handler(address, *args):
     print(f"predicted point: ({x}, {y})")
     print(f"std: ({std_x}, {std_y})")
 
+    # TODO: don't do this in the handler ARGH!
+    client_ip = "127.0.0.1"
+    client_port = 1338    
+    client = SimpleUDPClient(client_ip, client_port)  # Create client
+    client.send_message("/drum_sensor/client", [x, y, std_x, std_y])
+
 
 dispatcher = Dispatcher()
 dispatcher.set_default_handler(default_handler)
@@ -31,3 +38,5 @@ port = 1337
 
 server = BlockingOSCUDPServer((ip, port), dispatcher)
 server.serve_forever()  # Blocks forever
+
+
