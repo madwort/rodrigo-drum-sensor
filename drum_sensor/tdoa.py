@@ -39,7 +39,7 @@ def calculate_point(time_deltas_samples, speed, distance):
     g, h = _calculate_params(
         time_deltas_seconds[3], time_deltas_seconds[0], speed, distance
     )
-    return calculate_point_coefficients(quadrant, quadrant_starting_point, a, b, c, d, e, f, g, h)
+    return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
 
 
 def calculate_point_crosscorrelate(time_deltas_samples, speed, distance):
@@ -62,10 +62,10 @@ def calculate_point_crosscorrelate(time_deltas_samples, speed, distance):
     g, h = _calculate_params_crosscorrelate(
         time_deltas_seconds[3], speed, distance
     )
-    return calculate_point_coefficients(quadrant, quadrant_starting_point, a, b, c, d, e, f, g, h)
+    return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
 
 
-def calculate_point_coefficients(quadrant, quadrant_starting_point, a, b, c, d, e, f, g, h):
+def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h):
 
     print("equations:")
     print(f"NE ({a}x^2)-({b}(y-.1)^2)=1")
