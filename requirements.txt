@@ -3,3 +3,4 @@ scipy
 numpy
 pytest
 black
+python-osc

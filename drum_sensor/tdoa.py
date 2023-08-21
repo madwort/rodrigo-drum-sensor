@@ -12,6 +12,13 @@ def _calculate_params(td_1, td_2, speed, distance):
     return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
 
 
+def _calculate_params_crosscorrelate(time_diff, speed, distance):
+    """docstring for calculate_params"""
+    my_a = speed * time_diff / 2
+    my_c = distance / 2
+    return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
+
+
 def calculate_point(time_deltas_samples, speed, distance):
     time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
 
@@ -32,6 +39,35 @@ def calculate_point(time_deltas_samples, speed, distance):
     g, h = _calculate_params(
         time_deltas_seconds[3], time_deltas_seconds[0], speed, distance
     )
+    return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
+
+
+def calculate_point_crosscorrelate(time_deltas_samples, speed, distance):
+    time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
+
+    # quadrant, quadrant_starting_point = find_quadrant(time_deltas_seconds, distance)
+    quadrant = "unknown"
+    quadrant_starting_point = (0.0, 0.0)
+
+    print(f"quadrant: {quadrant}")
+    print(f"quadrant starting point: {quadrant_starting_point}")
+
+    a, b = _calculate_params_crosscorrelate(
+        time_deltas_seconds[0], speed, distance
+    )
+    c, d = _calculate_params_crosscorrelate(
+        time_deltas_seconds[1], speed, distance
+    )
+    e, f = _calculate_params_crosscorrelate(
+        time_deltas_seconds[2], speed, distance
+    )
+    g, h = _calculate_params_crosscorrelate(
+        time_deltas_seconds[3], speed, distance
+    )
+    return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
+
+
+def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h):
 
     print("equations:")
     print(f"NE ({a}x^2)-({b}(y-.1)^2)=1")
@@ -70,6 +106,7 @@ def calculate_point(time_deltas_samples, speed, distance):
             (a * (x**2)) - (b * ((y - 0.1) ** 2)) - 1,
         ]
         return eqs
+
 
     solutions = []
 

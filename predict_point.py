@@ -2,6 +2,7 @@ from drum_sensor.tdoa import calculate_point
 
 time_deltas_samples = [0, 80, 125, 83]
 # time_deltas_samples = [7, 4, 0, 4]
+
 print(f"time deltas: {time_deltas_samples}")
 
 speed = 82
