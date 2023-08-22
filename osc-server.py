@@ -3,13 +3,13 @@ from pythonosc.osc_server import BlockingOSCUDPServer
 from pythonosc.udp_client import SimpleUDPClient
 
 from drum_sensor.tdoa import calculate_point_crosscorrelate
-
+from drum_sensor.quadrant import convert_cross_samples_absolute
 
 def default_handler(address, *args):
     print(f"DEFAULT {address}: {args}")
 
     time_deltas_samples = args
-    print(f"time deltas: {time_deltas_samples}")
+    print(f"time deltas (relative): {time_deltas_samples}")
 
     speed = 82
     print(f"speed: {speed}m/s")

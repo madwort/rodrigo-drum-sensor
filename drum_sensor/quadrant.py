@@ -80,6 +80,7 @@ def convert_cross_samples_absolute(my_list):
             absolute_list[source_index] + my_list[source_index]
         )
 
+    print(f"absolute_list: {absolute_list}")
     return absolute_list
 
 
