@@ -38,10 +38,9 @@ def find_quadrant(my_list, distance):
             / 2,
         )
 
-    # TODO: len(min_posns) == 3
-    # this is impossible in theory, but happens in practice due to noisy measurements
-
-    if len(min_posns) == 4:
+    if len(min_posns) >= 3:
+        # three equal minimums is theoretically impossible, but happens in practice due to
+        # noisy measurements, though it's most likely a noisy dead-centre hit, so just do that
         quadrant_name = "dead-centre"
         starting_position = (0,0)
 
