@@ -30,22 +30,21 @@ def find_zero_crossings(my_list):
     for i, x in enumerate(my_list):
         if x > 0 and my_list[(i - 1) % len(my_list)] < 0:
             crossings.append(i)
-    print(crossings)
     return crossings
 
 
 def convert_cross_samples_absolute(my_list):
-    # I think the position where the sign changes from neg to pos is the one
-    # unless there are two, in which case the larger
-
     crossings = find_zero_crossings(my_list)
     if len(crossings) == 0:
         raise ValueError("No zero crossings, please normalise the samples.")
 
-    if len(crossings) == 2:
-        raise ValueError("Two zero crossings, please pick one.")
-
+    # default to the first crossing, this should be 0
     zero_index = crossings[0]
+
+    # unless there are two crossings, in which case take the larger of the two
+    if len(crossings) == 2:
+        if my_list[crossings[1]] > my_list[crossings[0]]:
+            zero_index = crossings[1]
 
     absolute_list = [0] * len(my_list)
 
