@@ -119,6 +119,11 @@ testdata = [
         (-0.0007351120602235915, -0.0005526554366400843),
         (0.0008271354253725052, 0.09329069005179348),
     ),
+    (
+        [76, 110, 69, 0],
+        (-0.06663724261388546, -0.07785863617548007),
+        (4.7146824482418955e-05, 2.5704656876176696e-05),
+    ),
 ]
 
 
@@ -140,6 +145,7 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
     #  in m
     distance = 0.202
 
+    print(f"time deltas: {time_deltas_samples}")
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
     _compare_points((x, y), (std_x, std_y), expected_point, expected_std)
@@ -154,7 +160,9 @@ def test_calculate_point_crosscorrelate(
     #  in m
     distance = 0.202
 
+    print(f"time deltas: {time_deltas_samples}")
     relative_time_deltas_samples = convert_time_deltas(time_deltas_samples)
+    print(f"time deltas (relative): {relative_time_deltas_samples}")
     x, y, std_x, std_y = calculate_point_crosscorrelate(
         relative_time_deltas_samples, speed, distance
     )

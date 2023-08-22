@@ -25,7 +25,6 @@ def find_quadrant(my_list, distance):
     starting_position = starting_positions[posn]
 
     if len(min_posns) == 2:
-        print(min_posns)
         if min_posns[0] == 1 and min_posns[1] == 2:
             # fixup for SE
             quadrant_name = f"{quadrants[min_posns[1]]}-{quadrants[min_posns[0]]}"
@@ -73,7 +72,6 @@ def convert_cross_samples_absolute(my_list):
 
     for i in range(1, len(my_list)):
         target_index = (zero_index + i) % len(my_list)
-        print(target_index)
         source_index = (target_index - 1) % len(my_list)
         absolute_list[target_index] = (
             absolute_list[source_index] + my_list[source_index]

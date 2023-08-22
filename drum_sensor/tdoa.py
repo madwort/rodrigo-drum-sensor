@@ -52,6 +52,7 @@ def calculate_point(time_deltas_samples, speed, distance):
 
 
 def generate_coefficients_crosscorrelate(time_deltas_samples, speed, distance):
+    """this is typically E-N, S-E, W-S, N-W"""
     time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
 
     quadrant, quadrant_starting_point = find_quadrant(
