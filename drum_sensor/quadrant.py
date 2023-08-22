@@ -1,7 +1,8 @@
 def _min_position(my_list):
     """docstring for min_position"""
     my_min = min(my_list)
-    min_indices = [i for i, x in enumerate(my_list) if x == my_min]
+    fudge_factor = 0.0001
+    min_indices = [i for i, x in enumerate(my_list) if x <= (my_min + fudge_factor)]
     return min_indices
 
 
@@ -18,6 +19,8 @@ def find_quadrant(my_list, distance):
     ]
 
     min_posns = _min_position(my_list)
+
+    print(f"min_posns: {min_posns}")
 
     # default quadrant (assuming one minimum)
     posn = min_posns[0]
