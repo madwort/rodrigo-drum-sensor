@@ -42,7 +42,7 @@ def find_quadrant(my_list, distance):
         # three equal minimums is theoretically impossible, but happens in practice due to
         # noisy measurements, though it's most likely a noisy dead-centre hit, so just do that
         quadrant_name = "dead-centre"
-        starting_position = (0,0)
+        starting_position = (0, 0)
 
     return (quadrant_name, starting_position)
 

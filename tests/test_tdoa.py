@@ -1,5 +1,6 @@
 from drum_sensor.tdoa import (
     calculate_point,
+    calculate_point_crosscorrelate,
     generate_coefficients,
     generate_coefficients_crosscorrelate,
     convert_time_deltas,
@@ -120,6 +121,28 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
     distance = 0.202
 
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
+
+    expected_x, expected_y = expected_point
+    expected_std_x, expected_std_y = expected_std
+    assert numpy.isclose(x, expected_x)
+    assert numpy.isclose(y, expected_y)
+    assert numpy.isclose(std_x, expected_std_x)
+    assert numpy.isclose(std_y, expected_std_y)
+
+
+@pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)
+def test_calculate_point_crosscorrelate(
+    time_deltas_samples, expected_point, expected_std
+):
+    speed = 82
+
+    #  in m
+    distance = 0.202
+
+    relative_time_deltas_samples = convert_time_deltas(time_deltas_samples)
+    x, y, std_x, std_y = calculate_point_crosscorrelate(
+        relative_time_deltas_samples, speed, distance
+    )
 
     expected_x, expected_y = expected_point
     expected_std_x, expected_std_y = expected_std
