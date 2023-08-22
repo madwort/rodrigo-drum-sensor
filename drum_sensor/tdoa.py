@@ -15,7 +15,7 @@ def _calculate_params_crosscorrelate(td, speed, distance):
     time_diff = abs(td)
     if time_diff == 0:
         # fudge factor so we don't get div by zero
-        time_diff = 0.001
+        time_diff = 0.00000001
     my_a = speed * time_diff / 2
     my_c = distance / 2
     return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
