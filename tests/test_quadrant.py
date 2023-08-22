@@ -14,6 +14,7 @@ midpoint_testdata = [
     ([90, 90, 0, 0], "south-west", (0, -0.0505)),
     ([90, 0, 0, 90], "south-east", (0.0505, 0)),
     ([0, 0, 0, 0], "dead-centre", (0, 0)),
+    ([0, 0, 0, 1], "dead-centre", (0, 0)),
 ]
 
 
