@@ -194,3 +194,15 @@ def test_generate_coefficients():
     # test the other params are close, as they are floats
     for i in range(1, len(regular) - 1):
         assert numpy.isclose(regular[i], new[i])
+
+
+def test_generate_coefficients_2():
+    # two adjacent equal times
+    speed = 82
+
+    #  in m
+    distance = 0.202
+
+    regular = generate_coefficients([0, 80, 80, 125], speed, distance)
+
+    assert regular == None
