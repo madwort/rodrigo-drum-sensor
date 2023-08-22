@@ -122,7 +122,7 @@ testdata = [
 ]
 
 
-def compare_points(calculated_point, calculated_std, expected_point, expected_std):
+def _compare_points(calculated_point, calculated_std, expected_point, expected_std):
     x, y = calculated_point
     std_x, std_y = calculated_std
     expected_x, expected_y = expected_point
@@ -142,7 +142,7 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
 
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
-    compare_points((x, y), (std_x, std_y), expected_point, expected_std)
+    _compare_points((x, y), (std_x, std_y), expected_point, expected_std)
 
 
 @pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)
@@ -159,7 +159,7 @@ def test_calculate_point_crosscorrelate(
         relative_time_deltas_samples, speed, distance
     )
 
-    compare_points((x, y), (std_x, std_y), expected_point, expected_std)
+    _compare_points((x, y), (std_x, std_y), expected_point, expected_std)
 
 
 def convert_time_deltas(time_deltas_samples):
