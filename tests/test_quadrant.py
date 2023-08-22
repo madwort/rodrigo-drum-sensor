@@ -82,3 +82,9 @@ def test_find_zero_crossings():
 def test_find_zero_crossings_double():
     crossings = quadrant.find_zero_crossings([1, -30, 31, -2])
     assert crossings == [0, 2]
+
+
+def test_find_zero_crossings_none():
+    # this was some actual generated test data, unclear what it means in the real world
+    crossings = quadrant.find_zero_crossings([-1.5, -1.5, -1.5, -1.5])
+    assert crossings == []
