@@ -96,6 +96,13 @@ def test_convert_cross_samples_absolute():
     assert absolute_deltas == [0, 80, 125, 83]
 
 
+def test_convert_cross_samples_absolute2():
+    relative_deltas = [0, -63, -1, 64]
+    absolute_deltas = quadrant.convert_cross_samples_absolute(relative_deltas)
+
+    assert absolute_deltas == [64, 64, 1, 0]
+
+
 @pytest.mark.parametrize("time_deltas_samples,time_deltas_samples_cross", testdata)
 def test_convert_cross_samples_absolute(time_deltas_samples, time_deltas_samples_cross):
     relative_deltas = time_deltas_samples_cross
