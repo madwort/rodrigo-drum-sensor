@@ -3,7 +3,6 @@ from drum_sensor.tdoa import (
     calculate_point_crosscorrelate,
     generate_coefficients,
     generate_coefficients_crosscorrelate,
-    convert_time_deltas,
 )
 
 import numpy
@@ -150,6 +149,15 @@ def test_calculate_point_crosscorrelate(
     assert numpy.isclose(y, expected_y)
     assert numpy.isclose(std_x, expected_std_x)
     assert numpy.isclose(std_y, expected_std_y)
+
+
+def convert_time_deltas(time_deltas_samples):
+    return [
+        (time_deltas_samples[1] - time_deltas_samples[0]),
+        (time_deltas_samples[2] - time_deltas_samples[1]),
+        (time_deltas_samples[3] - time_deltas_samples[2]),
+        (time_deltas_samples[0] - time_deltas_samples[3]),
+    ]
 
 
 @pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)

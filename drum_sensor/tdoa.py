@@ -20,16 +20,6 @@ def _calculate_params_crosscorrelate(td, speed, distance):
     return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
 
 
-# discovery function only used in tests
-def convert_time_deltas(time_deltas_samples):
-    return [
-        (time_deltas_samples[1] - time_deltas_samples[0]),
-        (time_deltas_samples[2] - time_deltas_samples[1]),
-        (time_deltas_samples[3] - time_deltas_samples[2]),
-        (time_deltas_samples[0] - time_deltas_samples[3]),
-    ]
-
-
 def generate_coefficients(time_deltas_samples, speed, distance):
     time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
 
