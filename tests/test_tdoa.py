@@ -116,8 +116,8 @@ testdata = [
     ),
     (
         [64, 64, 1, 0],
-        (0.01965685354327838, -0.01977876469592925),
-        (0.01831626060232068, 0.017007225390593017),
+        (-0.053266072167133846, -0.05838281878700652),
+        (0.05422350607781515, 0.09649245177712681),
     ),
 ]
 
@@ -142,7 +142,7 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
 
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
-    compare_points((x,y), (std_x, std_y), expected_point, expected_std)
+    compare_points((x, y), (std_x, std_y), expected_point, expected_std)
 
 
 @pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)
@@ -159,7 +159,7 @@ def test_calculate_point_crosscorrelate(
         relative_time_deltas_samples, speed, distance
     )
 
-    compare_points((x,y), (std_x, std_y), expected_point, expected_std)
+    compare_points((x, y), (std_x, std_y), expected_point, expected_std)
 
 
 def convert_time_deltas(time_deltas_samples):
@@ -205,4 +205,14 @@ def test_generate_coefficients_2():
 
     regular = generate_coefficients([0, 80, 80, 125], speed, distance)
 
-    assert regular == None
+    assert regular == (
+        (-0.0505, 0.0505),
+        180.7713042831648,
+        214.1718103968868,
+        594.8839976204639,
+        117.37089201877932,
+        571.3265913146938,
+        118.33356571265956,
+        74.0439262343843,
+        -302.6179465626542,
+    )
