@@ -41,6 +41,10 @@ def find_quadrant(my_list, distance):
     # TODO: len(min_posns) == 3
     # this is impossible in theory, but happens in practice due to noisy measurements
 
+    if len(min_posns) == 4:
+        quadrant_name = "dead-centre"
+        starting_position = (0,0)
+
     return (quadrant_name, starting_position)
 
 
