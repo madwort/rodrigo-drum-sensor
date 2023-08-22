@@ -150,5 +150,5 @@ def test_generate_coefficients():
     assert regular[0] == new[0]
 
     # test the other params are close, as they are floats
-    for i in range(1,len(regular)-1):
+    for i in range(1, len(regular) - 1):
         assert numpy.isclose(regular[i], new[i])
