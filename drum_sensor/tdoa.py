@@ -7,12 +7,7 @@ from drum_sensor.quadrant import find_quadrant, convert_cross_samples_absolute
 def _calculate_params(td_1, td_2, speed, distance):
     """docstring for calculate_params"""
     time_diff = abs(td_2 - td_1)
-    if time_diff == 0:
-        # fudge factor so we don't get div by zero
-        time_diff = 0.001
-    my_a = speed * time_diff / 2
-    my_c = distance / 2
-    return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
+    return _calculate_params_crosscorrelate(time_diff, speed, distance)
 
 
 def _calculate_params_crosscorrelate(td, speed, distance):
