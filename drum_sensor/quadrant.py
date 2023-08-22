@@ -22,3 +22,10 @@ def find_quadrant(my_list, distance):
 
     posn = _min_position(my_list)
     return (quadrants[posn], starting_positions[posn])
+
+
+def find_quadrant_cross(my_list, distance):
+    # TODO: implement
+
+    # I think the position where the sign changes from neg to pos is the one
+    pass

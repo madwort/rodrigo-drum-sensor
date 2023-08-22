@@ -18,7 +18,9 @@ def default_handler(address, *args):
     distance = 0.202
     print(f"sensor-to-sensor distance: {distance}")
 
-    x, y, std_x, std_y = calculate_point_crosscorrelate(time_deltas_samples, speed, distance)
+    x, y, std_x, std_y = calculate_point_crosscorrelate(
+        time_deltas_samples, speed, distance
+    )
 
     print(f"predicted point: ({x}, {y})")
     print(f"std: ({std_x}, {std_y})")
@@ -42,5 +44,3 @@ port = 1337
 
 server = BlockingOSCUDPServer((ip, port), dispatcher)
 server.serve_forever()  # Blocks forever
-
-

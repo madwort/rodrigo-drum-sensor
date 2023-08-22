@@ -20,6 +20,16 @@ def _calculate_params_crosscorrelate(td, speed, distance):
     return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
 
 
+# discovery function only used in tests
+def convert_time_deltas(time_deltas_samples):
+    return [
+        (time_deltas_samples[1] - time_deltas_samples[0]),
+        (time_deltas_samples[2] - time_deltas_samples[1]),
+        (time_deltas_samples[3] - time_deltas_samples[2]),
+        (time_deltas_samples[0] - time_deltas_samples[3]),
+    ]
+
+
 def generate_coefficients(time_deltas_samples, speed, distance):
     time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
 
@@ -42,8 +52,11 @@ def generate_coefficients(time_deltas_samples, speed, distance):
     )
     return (quadrant_starting_point, a, b, c, d, e, f, g, h)
 
+
 def calculate_point(time_deltas_samples, speed, distance):
-    quadrant_starting_point, a, b, c, d, e, f, g, h = generate_coefficients(time_deltas_samples, speed, distance)
+    quadrant_starting_point, a, b, c, d, e, f, g, h = generate_coefficients(
+        time_deltas_samples, speed, distance
+    )
     return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
 
 
@@ -57,28 +70,29 @@ def generate_coefficients_crosscorrelate(time_deltas_samples, speed, distance):
     print(f"quadrant: {quadrant}")
     print(f"quadrant starting point: {quadrant_starting_point}")
 
-    a, b = _calculate_params_crosscorrelate(
-        time_deltas_seconds[0], speed, distance
-    )
-    c, d = _calculate_params_crosscorrelate(
-        time_deltas_seconds[1], speed, distance
-    )
-    e, f = _calculate_params_crosscorrelate(
-        time_deltas_seconds[2], speed, distance
-    )
-    g, h = _calculate_params_crosscorrelate(
-        time_deltas_seconds[3], speed, distance
-    )
+    a, b = _calculate_params_crosscorrelate(time_deltas_seconds[0], speed, distance)
+    c, d = _calculate_params_crosscorrelate(time_deltas_seconds[1], speed, distance)
+    e, f = _calculate_params_crosscorrelate(time_deltas_seconds[2], speed, distance)
+    g, h = _calculate_params_crosscorrelate(time_deltas_seconds[3], speed, distance)
     return (quadrant_starting_point, a, b, c, d, e, f, g, h)
 
 
 def calculate_point_crosscorrelate(time_deltas_samples, speed, distance):
-    quadrant_starting_point, a, b, c, d, e, f, g, h = generate_coefficients_crosscorrelate(time_deltas_samples, speed, distance)
+    (
+        quadrant_starting_point,
+        a,
+        b,
+        c,
+        d,
+        e,
+        f,
+        g,
+        h,
+    ) = generate_coefficients_crosscorrelate(time_deltas_samples, speed, distance)
     return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
 
 
 def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h):
-
     print("equations:")
     print(f"NE ({a}x^2)-({b}(y-.1)^2)=1")
     print(f"ES ({c}y^2)-({d}(x-.1)^2)=1")
@@ -116,7 +130,6 @@ def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h
             (a * (x**2)) - (b * ((y - 0.1) ** 2)) - 1,
         ]
         return eqs
-
 
     solutions = []
 
