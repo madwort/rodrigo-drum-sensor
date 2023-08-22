@@ -8,6 +8,13 @@ testdata = [
     ([29, 30, 0, 31], [1, -30, 31, -2]),
 ]
 
+midpoint_testdata = [
+    ([0, 90, 90, 0], "north-west", (-0.0505, 0)),
+    ([0, 0, 90, 90], "north-east", (0, 0.0505)),
+    ([90, 90, 0, 0], "south-west", (0, -0.0505)),
+    ([90, 0, 0, 90], "south-east", (0.0505, 0)),
+]
+
 
 def test__min_position():
     deltas = [80, 1, 125, 83]
@@ -15,7 +22,16 @@ def test__min_position():
     print(min(deltas))
     my_i = quadrant._min_position(deltas)
     print(my_i)
-    assert my_i == 1
+    assert my_i == [1]
+
+
+def test__min_position_twin():
+    deltas = [80, 1, 1, 125]
+
+    print(min(deltas))
+    my_i = quadrant._min_position(deltas)
+    print(my_i)
+    assert my_i == [1, 2]
 
 
 def test_quadrant():
@@ -34,6 +50,18 @@ def test_quadrant_2():
 
     assert my_quadrant == "north"
     assert starting_position == (-0.0505, 0.0505)
+
+
+@pytest.mark.parametrize(
+    "time_deltas_samples,quadrant_name,starting_point", midpoint_testdata
+)
+def test_quadrant_midpoint(time_deltas_samples, quadrant_name, starting_point):
+    deltas = time_deltas_samples
+
+    my_quadrant, my_starting_position = quadrant.find_quadrant(deltas, 0.202)
+
+    assert my_quadrant == quadrant_name
+    assert my_starting_position == starting_point
 
 
 def test_quadrant_crosscorrelate():

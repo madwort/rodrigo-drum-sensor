@@ -1,11 +1,8 @@
 def _min_position(my_list):
     """docstring for min_position"""
     my_min = min(my_list)
-    for i, x in enumerate(my_list):
-        if x == my_min:
-            # take the first among equals position
-            # TODO: do something more clever if there are multiple equal min positions
-            return i
+    min_indices = [i for i, x in enumerate(my_list) if x == my_min]
+    return min_indices
 
 
 def find_quadrant(my_list, distance):
@@ -20,8 +17,31 @@ def find_quadrant(my_list, distance):
         (-midpoint, -midpoint),
     ]
 
-    posn = _min_position(my_list)
-    return (quadrants[posn], starting_positions[posn])
+    min_posns = _min_position(my_list)
+
+    # default quadrant (assuming one minimum)
+    posn = min_posns[0]
+    quadrant_name = quadrants[posn]
+    starting_position = starting_positions[posn]
+
+    if len(min_posns) == 2:
+        print(min_posns)
+        if min_posns[0] == 1 and min_posns[1] == 2:
+            # fixup for SE
+            quadrant_name = f"{quadrants[min_posns[1]]}-{quadrants[min_posns[0]]}"
+        else:
+            quadrant_name = f"{quadrants[min_posns[0]]}-{quadrants[min_posns[1]]}"
+        starting_position = (
+            (starting_positions[min_posns[0]][0] + starting_positions[min_posns[1]][0])
+            / 2,
+            (starting_positions[min_posns[0]][1] + starting_positions[min_posns[1]][1])
+            / 2,
+        )
+
+    # TODO: len(min_posns) == 3
+    # this is impossible in theory, but happens in practice due to noisy measurements
+
+    return (quadrant_name, starting_position)
 
 
 def find_zero_crossings(my_list):
