@@ -5,6 +5,7 @@ import pytest
 testdata = [
     ([0, 80, 125, 83], [80, 45, -42, -83]),
     ([70, 117, 77, 0], [47, -40, -77, 70]),
+    ([29, 30, 0, 31], [1, -30, 31, -2]),
 ]
 
 
@@ -39,7 +40,9 @@ def test_quadrant_crosscorrelate():
     # this should equal to [0, 80, 125, 83]
     deltas = [80, 45, -42, -83]
 
-    my_quadrant, starting_position = quadrant.find_quadrant(deltas, 0.202)
+    my_quadrant, starting_position = quadrant.find_quadrant(
+        quadrant.convert_cross_samples_absolute(deltas), 0.202
+    )
 
     assert my_quadrant == "north"
     assert starting_position == (-0.0505, 0.0505)
@@ -49,8 +52,33 @@ def test_quadrant_crosscorrelate():
 def test_quadrant_compare(time_deltas_samples, time_deltas_samples_cross):
     my_quadrant, starting_position = quadrant.find_quadrant(time_deltas_samples, 0.202)
     my_quadrant_cross, starting_position_cross = quadrant.find_quadrant(
-        time_deltas_samples_cross, 0.202
+        quadrant.convert_cross_samples_absolute(time_deltas_samples_cross), 0.202
     )
 
     assert my_quadrant == my_quadrant_cross
     assert starting_position == starting_position_cross
+
+
+def test_convert_cross_samples_absolute():
+    relative_deltas = [80, 45, -42, -83]
+    absolute_deltas = quadrant.convert_cross_samples_absolute(relative_deltas)
+
+    assert absolute_deltas == [0, 80, 125, 83]
+
+
+@pytest.mark.parametrize("time_deltas_samples,time_deltas_samples_cross", testdata)
+def test_convert_cross_samples_absolute(time_deltas_samples, time_deltas_samples_cross):
+    relative_deltas = time_deltas_samples_cross
+    absolute_deltas = quadrant.convert_cross_samples_absolute(relative_deltas)
+
+    assert absolute_deltas == time_deltas_samples
+
+
+def test_find_zero_crossings():
+    crossings = quadrant.find_zero_crossings([80, 45, -42, -83])
+    assert crossings == [0]
+
+
+def test_find_zero_crossings_double():
+    crossings = quadrant.find_zero_crossings([1, -30, 31, -2])
+    assert crossings == [0, 2]

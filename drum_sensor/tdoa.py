@@ -1,7 +1,7 @@
 import numpy
 from scipy.optimize import fsolve
 from drum_sensor.samples import convert_samples_to_seconds
-from drum_sensor.quadrant import find_quadrant
+from drum_sensor.quadrant import find_quadrant, convert_cross_samples_absolute
 
 
 def _calculate_params(td_1, td_2, speed, distance):
@@ -63,9 +63,7 @@ def calculate_point(time_deltas_samples, speed, distance):
 def generate_coefficients_crosscorrelate(time_deltas_samples, speed, distance):
     time_deltas_seconds = list(map(convert_samples_to_seconds, time_deltas_samples))
 
-    # quadrant, quadrant_starting_point = find_quadrant(time_deltas_seconds, distance)
-    quadrant = "unknown"
-    quadrant_starting_point = (0.0, 0.0)
+    quadrant, quadrant_starting_point = find_quadrant(convert_cross_samples_absolute(time_deltas_seconds), distance)
 
     print(f"quadrant: {quadrant}")
     print(f"quadrant starting point: {quadrant_starting_point}")

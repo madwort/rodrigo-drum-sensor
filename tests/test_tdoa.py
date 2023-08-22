@@ -130,7 +130,7 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
 
 
 @pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)
-def test_convert_time_deltas(time_deltas_samples,expected_point,expected_std):
+def test_convert_time_deltas(time_deltas_samples, expected_point, expected_std):
     print(time_deltas_samples)
     newstyle = convert_time_deltas(time_deltas_samples)
     print(newstyle)
@@ -146,4 +146,3 @@ def test_generate_coefficients():
     regular = generate_coefficients([0, 80, 125, 83], speed, distance)
     new = generate_coefficients_crosscorrelate([80, 45, -42, -83], speed, distance)
     assert regular == new
-
