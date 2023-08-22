@@ -145,4 +145,10 @@ def test_generate_coefficients():
 
     regular = generate_coefficients([0, 80, 125, 83], speed, distance)
     new = generate_coefficients_crosscorrelate([80, 45, -42, -83], speed, distance)
-    assert regular == new
+
+    # test first param with equality, this is the quadrant tuple
+    assert regular[0] == new[0]
+
+    # test the other params are close, as they are floats
+    for i in range(1,len(regular)-1):
+        assert numpy.isclose(regular[i], new[i])
