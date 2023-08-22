@@ -51,7 +51,7 @@ def find_zero_crossings(my_list):
     """can return 0,1 or 2 indices of crossings"""
     crossings = []
     for i, x in enumerate(my_list):
-        if x > 0 and my_list[(i - 1) % len(my_list)] < 0:
+        if x >= 0 and my_list[(i - 1) % len(my_list)] <= 0:
             crossings.append(i)
     return crossings
 
