@@ -112,6 +112,17 @@ testdata = [
 ]
 
 
+def compare_points(calculated_point, calculated_std, expected_point, expected_std):
+    x, y = calculated_point
+    std_x, std_y = calculated_std
+    expected_x, expected_y = expected_point
+    expected_std_x, expected_std_y = expected_std
+    assert numpy.isclose(x, expected_x)
+    assert numpy.isclose(y, expected_y)
+    assert numpy.isclose(std_x, expected_std_x)
+    assert numpy.isclose(std_y, expected_std_y)
+
+
 @pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)
 def test_calculate_point(time_deltas_samples, expected_point, expected_std):
     speed = 82
@@ -121,12 +132,7 @@ def test_calculate_point(time_deltas_samples, expected_point, expected_std):
 
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
-    expected_x, expected_y = expected_point
-    expected_std_x, expected_std_y = expected_std
-    assert numpy.isclose(x, expected_x)
-    assert numpy.isclose(y, expected_y)
-    assert numpy.isclose(std_x, expected_std_x)
-    assert numpy.isclose(std_y, expected_std_y)
+    compare_points((x,y), (std_x, std_y), expected_point, expected_std)
 
 
 @pytest.mark.parametrize("time_deltas_samples,expected_point,expected_std", testdata)
@@ -143,12 +149,7 @@ def test_calculate_point_crosscorrelate(
         relative_time_deltas_samples, speed, distance
     )
 
-    expected_x, expected_y = expected_point
-    expected_std_x, expected_std_y = expected_std
-    assert numpy.isclose(x, expected_x)
-    assert numpy.isclose(y, expected_y)
-    assert numpy.isclose(std_x, expected_std_x)
-    assert numpy.isclose(std_y, expected_std_y)
+    compare_points((x,y), (std_x, std_y), expected_point, expected_std)
 
 
 def convert_time_deltas(time_deltas_samples):
