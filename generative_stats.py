@@ -16,7 +16,7 @@ def main():
     )
 
     distance = 0.202
-    count = 15
+    count = 100
     # TODO: remove fudge factor because it crashes at the extreme edges
     corner = (-distance / 2) + 0.0001
     spacing = distance / count
@@ -42,9 +42,8 @@ def main():
     spamwriter.writerow([])
     spamwriter.writerow(["fudge factor", f"{get_fudge_factor()}"])
     spamwriter.writerow(["sample points", f"{count**2}"])
-    spamwriter.writerow(["total error", f"{total_error}"])
     spamwriter.writerow(["mean error", f"{total_error/(count**2)}"])
-    spamwriter.writerow(["worst error", f"{worst_error}"])
+    spamwriter.writerow(["worst error",f"{worst_error}"])
 
     print("===========================================")
     print(f"fudge factor: {get_fudge_factor()}")
