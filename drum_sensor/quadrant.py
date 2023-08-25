@@ -1,6 +1,5 @@
 import numpy
 
-
 def get_fudge_factor():
     return 0.0001
 
@@ -26,9 +25,9 @@ def find_quadrant(my_list, distance):
     # rough midpoint of the quadrant
     midpoint = distance / 4
     if len(min_posns) == 1:
-        midpoint = distance / 2 * (numpy.ptp(my_list) / 0.00348)
+        midpoint = distance / 2 * (numpy.ptp(my_list)/0.00348)
     if len(min_posns) == 2:
-        midpoint = distance / 2 * (numpy.ptp(my_list) / 0.00150)
+        midpoint = distance / 2 * (numpy.ptp(my_list)/0.00150)
 
     # if there are multiple equal points, we may want to do e.g. (midpoint, 0)
     starting_positions = [
@@ -37,6 +36,7 @@ def find_quadrant(my_list, distance):
         (midpoint, -midpoint),
         (-midpoint, -midpoint),
     ]
+
 
     # default quadrant (assuming one minimum)
     posn = min_posns[0]
