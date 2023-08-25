@@ -77,12 +77,14 @@ def test_calculate_point_batch(distance, test_point):
     # assert std_y < 0.0003
     assert error < 0.011
 
+
 specific_test_points = [
     (0.006733333333333327, -0.101),
     # (0.006733333333333327, 0.006733333333333327),
-    (0.000100000000000003,-0.1009),
+    (0.000100000000000003, -0.1009),
     # (0.000100000000000003,-0.0509),
 ]
+
 
 @pytest.mark.parametrize("distance", distance)
 @pytest.mark.parametrize("test_point", specific_test_points)
@@ -99,7 +101,6 @@ def test_calculate_point_specific(distance, test_point):
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
     error = _diagonal_distance((x, y), test_point)
-
 
     print("-------------------------------------------")
     print(f"test point: {test_point}")

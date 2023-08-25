@@ -1,6 +1,6 @@
-
 def get_fudge_factor():
     return 0.0002
+
 
 def _min_position(my_list):
     """docstring for min_position"""

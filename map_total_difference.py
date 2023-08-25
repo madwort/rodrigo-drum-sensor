@@ -1,16 +1,15 @@
-
 from drum_sensor.samples import convert_seconds_to_samples, convert_samples_to_seconds
 
 import csv
 import math
 import numpy
 
+
 def _diagonal_distance(p1, p2):
     x = p2[0] - p1[0]
     y = p2[1] - p1[1]
     distance = math.sqrt((x**2) + (y**2))
     return distance
-
 
 
 def _generate_tdoa_from_point(test_point, speed, distance):
@@ -29,6 +28,7 @@ def _generate_tdoa_from_point(test_point, speed, distance):
         )
 
     return time_deltas_samples
+
 
 def main():
     csvfile = open("mapping.csv", "w", newline="")
