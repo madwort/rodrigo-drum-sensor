@@ -7,6 +7,8 @@ import math
 
 
 import csv
+import numpy
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -22,6 +24,9 @@ def main():
     spacing = distance / count
     total_error = 0
     worst_error = 0
+
+    results_array = []
+
     header_row = ["x"]
     for y in range(count):
         header_row.append((corner + (spacing * y)))
@@ -29,14 +34,17 @@ def main():
 
     for x in range(count):
         my_row = [(corner + (spacing * x))]
+        row_results = [] 
         for y in range(count):
             my_error = test_calculate_point(
                 distance, ((corner + (spacing * x)), (corner + (spacing * y)))
             )
             my_row.append(my_error)
+            row_results.append(my_error)
             total_error += my_error
             if my_error > worst_error:
                 worst_error = my_error
+        results_array.append(row_results)
         spamwriter.writerow(my_row)
 
     spamwriter.writerow([])
@@ -53,6 +61,12 @@ def main():
     print(f"mean error: {total_error/(count**2)}")
     print(f"worst error: {worst_error}")
     print("===========================================")
+
+    # plot heatmap
+    mynumpy = numpy.array(results_array)
+    fig, ax = plt.subplots()
+    ax.imshow(mynumpy)
+    plt.show()
 
 
 def _diagonal_distance(p1, p2):
