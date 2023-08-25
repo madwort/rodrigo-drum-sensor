@@ -7,7 +7,7 @@ import math
 
 def main():
     distance = 0.202
-    count = 15
+    count = 30
     # TODO: remove fudge factor because it crashes at the extreme edges
     corner = (-distance / 2)+0.0001
     spacing = distance / count
@@ -16,8 +16,11 @@ def main():
         for y in range(count):
             error += test_calculate_point(distance, ((corner + (spacing * x)), (corner + (spacing * y))))
 
+    print("===========================================")
+    print(f"sample points: {count**2}")
     print(f"total error: {error}")
     print(f"mean error: {error/(count**2)}")
+    print("===========================================")
 
 def _diagonal_distance(p1, p2):
     x = p2[0] - p1[0]
