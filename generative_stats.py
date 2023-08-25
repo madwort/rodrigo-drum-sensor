@@ -22,8 +22,13 @@ def main():
     spacing = distance / count
     total_error = 0
     worst_error = 0
+    header_row = ["x"]
+    for y in range(count):
+        header_row.append((corner + (spacing * y)))
+    spamwriter.writerow(header_row)
+
     for x in range(count):
-        my_row = []
+        my_row = [(corner + (spacing * x))]
         for y in range(count):
             my_error = test_calculate_point(
                 distance, ((corner + (spacing * x)), (corner + (spacing * y)))
@@ -42,6 +47,7 @@ def main():
     spamwriter.writerow(["worst error",f"{worst_error}"])
 
     print("===========================================")
+    print(f"fudge factor: {get_fudge_factor()}")
     print(f"sample points: {count**2}")
     print(f"total error: {total_error}")
     print(f"mean error: {total_error/(count**2)}")
