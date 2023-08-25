@@ -73,4 +73,3 @@ def test_calculate_point_batch(distance, test_point):
     print("-------------------------------------------")
 
     assert error < 0.011
-    assert False
