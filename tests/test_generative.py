@@ -11,7 +11,7 @@ distance = [0.202]
 def _generate_test_positions(distances):
     distance = distances[0]
     test_positions = []
-    count = 10
+    count = 15
     corner = -distance / 2
     spacing = distance / count
     for x in range(count):
@@ -51,6 +51,8 @@ def _generate_tdoa_from_point(test_point, speed, distance):
 @pytest.mark.parametrize("distance", distance)
 @pytest.mark.parametrize("test_point", test_positions)
 def test_calculate_point_batch(distance, test_point):
+    # TODO: get this to output a CSV & then make a graphing pipeline
+    # ...and then improve the performance!
     speed = 82
 
     #  in m
@@ -70,4 +72,5 @@ def test_calculate_point_batch(distance, test_point):
     print(f"error: {error}")
     print("-------------------------------------------")
 
-    assert error < 0.0005
+    assert error < 0.011
+    assert False
