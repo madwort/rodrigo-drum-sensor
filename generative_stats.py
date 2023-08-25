@@ -5,22 +5,37 @@ from drum_sensor.samples import convert_seconds_to_samples
 import math
 
 
+import csv
+
+
 def main():
+    csvfile = open("error.csv", "w", newline="")
+    spamwriter = csv.writer(
+        csvfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL
+    )
+
     distance = 0.202
-    count = 30
+    count = 15
     # TODO: remove fudge factor because it crashes at the extreme edges
-    corner = (-distance / 2)+0.0001
+    corner = (-distance / 2) + 0.0001
     spacing = distance / count
-    error = 0
+    total_error = 0
     for x in range(count):
+        my_row = []
         for y in range(count):
-            error += test_calculate_point(distance, ((corner + (spacing * x)), (corner + (spacing * y))))
+            my_error = test_calculate_point(
+                distance, ((corner + (spacing * x)), (corner + (spacing * y)))
+            )
+            my_row.append(my_error)
+            total_error += my_error
+        spamwriter.writerow(my_row)
 
     print("===========================================")
     print(f"sample points: {count**2}")
-    print(f"total error: {error}")
-    print(f"mean error: {error/(count**2)}")
+    print(f"total error: {total_error}")
+    print(f"mean error: {total_error/(count**2)}")
     print("===========================================")
+
 
 def _diagonal_distance(p1, p2):
     x = p2[0] - p1[0]
@@ -45,6 +60,7 @@ def _generate_tdoa_from_point(test_point, speed, distance):
         )
 
     return time_deltas_samples
+
 
 def test_calculate_point(distance, test_point):
     # TODO: get this to output a CSV & then make a graphing pipeline
