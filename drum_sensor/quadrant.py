@@ -64,11 +64,14 @@ def find_zero_crossings(my_list):
 
 def convert_cross_samples_absolute(my_list):
     crossings = find_zero_crossings(my_list)
+    zero_index = 0
     if len(crossings) == 0:
-        raise ValueError("No zero crossings, please normalise the samples.")
-
-    # default to the first crossing, this should be 0
-    zero_index = crossings[0]
+        # TODO: try  normalising the samples to see if we can improve on this
+        # needs real-world test data tho
+        print("Warning - No zero crossings, arbitrarily sticking with [0].")
+    else:
+        # default to the first crossing, this should be 0
+        zero_index = crossings[0]
 
     # unless there are two crossings, in which case take the larger of the two
     if len(crossings) == 2:

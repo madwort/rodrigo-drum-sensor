@@ -101,7 +101,7 @@ def test_quadrant_compare(time_deltas_samples, time_deltas_samples_cross):
     assert starting_position == starting_position_cross
 
 
-def test_convert_cross_samples_absolute():
+def test_convert_cross_samples_absolute1():
     relative_deltas = [80, 45, -42, -83]
     absolute_deltas = quadrant.convert_cross_samples_absolute(relative_deltas)
 
