@@ -1,7 +1,11 @@
+
+def get_fudge_factor():
+    return 0.0002
+
 def _min_position(my_list):
     """docstring for min_position"""
     my_min = min(my_list)
-    fudge_factor = 0.0002
+    fudge_factor = get_fudge_factor()
     min_indices = [i for i, x in enumerate(my_list) if x <= (my_min + fudge_factor)]
     return min_indices
 

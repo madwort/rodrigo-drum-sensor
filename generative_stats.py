@@ -2,6 +2,7 @@ from drum_sensor.tdoa import (
     calculate_point,
 )
 from drum_sensor.samples import convert_seconds_to_samples
+from drum_sensor.quadrant import get_fudge_factor
 import math
 
 
@@ -13,6 +14,9 @@ def main():
     spamwriter = csv.writer(
         csvfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL
     )
+
+    spamwriter.writerow([f"Current fudge factor is {get_fudge_factor()}"])
+    spamwriter.writerow([])
 
     distance = 0.202
     count = 15
