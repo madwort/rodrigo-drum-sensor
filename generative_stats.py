@@ -18,7 +18,7 @@ def main():
     )
 
     distance = 0.202
-    count = 15
+    count = 100
     # TODO: remove fudge factor because it crashes at the extreme edges
     corner = (-distance / 2) + 0.0001
     spacing = distance / count
@@ -34,7 +34,7 @@ def main():
 
     for x in range(count):
         my_row = [(corner + (spacing * x))]
-        row_results = [] 
+        row_results = []
         for y in range(count):
             my_error = test_calculate_point(
                 distance, ((corner + (spacing * x)), (corner + (spacing * y)))
@@ -63,8 +63,13 @@ def main():
 
     # plot heatmap
     mynumpy = numpy.array(results_array)
-    fig, ax = plt.subplots()
-    ax.imshow(mynumpy)
+    flatresults = mynumpy.flatten()
+
+    fig, axs = plt.subplots(1, 2)
+    axs[0].imshow(mynumpy)
+    axs[1].hist(flatresults, bins=50)
+    axs[1].set_yscale("log")
+
     plt.show()
 
 
