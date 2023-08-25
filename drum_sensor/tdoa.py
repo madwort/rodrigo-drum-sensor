@@ -84,6 +84,10 @@ def calculate_point_crosscorrelate(time_deltas_samples, speed, distance):
     return calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h)
 
 
+def _same_sign(a, b):
+    return (a * b) >= 0
+
+
 def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h):
     print("equations:")
     print(f"NE ({a}x^2)-({b}(y-.1)^2)=1")
@@ -123,13 +127,24 @@ def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h
         ]
         return eqs
 
-    solutions = []
+    candidate_solutions = []
 
     # attempt to solve pairs of equations
-    solutions.append(fsolve(equations_1, quadrant_starting_point))
-    solutions.append(fsolve(equations_2, quadrant_starting_point))
-    solutions.append(fsolve(equations_3, quadrant_starting_point))
-    solutions.append(fsolve(equations_4, quadrant_starting_point))
+    candidate_solutions.append(fsolve(equations_1, quadrant_starting_point))
+    candidate_solutions.append(fsolve(equations_2, quadrant_starting_point))
+    candidate_solutions.append(fsolve(equations_3, quadrant_starting_point))
+    candidate_solutions.append(fsolve(equations_4, quadrant_starting_point))
+
+    solutions = [
+        x
+        for x in candidate_solutions
+        if _same_sign(x[0], quadrant_starting_point[0])
+        and _same_sign(x[1], quadrant_starting_point[1])
+    ]
+
+    # graceful handling if *no* solutions are in the correct quadrant
+    if len(solutions) == 0:
+        solutions = candidate_solutions
 
     print("intersections:")
     print(solutions)

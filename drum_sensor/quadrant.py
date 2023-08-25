@@ -1,5 +1,5 @@
 def get_fudge_factor():
-    return 0.0002
+    return 0.0
 
 
 def _min_position(my_list):
