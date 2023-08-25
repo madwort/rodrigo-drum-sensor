@@ -135,13 +135,7 @@ def calculate_point_coefficients(quadrant_starting_point, a, b, c, d, e, f, g, h
     print(solutions)
 
     x, y = numpy.mean(solutions, axis=0)
-    print(f"mean: ({x}, {y})")
     std_x, std_y = numpy.std(solutions, axis=0)
-
-    if std_x > 0.001 or std_y > 0.001:
-        x, y = numpy.median(solutions, axis=0)
-        print("std too large")
-        print(f"median: {x}, {y}")
 
     print(f"predicted point: ({x}, {y})")
     print(f"std: ({std_x}, {std_y})")
