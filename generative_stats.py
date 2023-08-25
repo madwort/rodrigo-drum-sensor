@@ -15,9 +15,6 @@ def main():
         csvfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL
     )
 
-    spamwriter.writerow([f"Current fudge factor is {get_fudge_factor()}"])
-    spamwriter.writerow([])
-
     distance = 0.202
     count = 15
     # TODO: remove fudge factor because it crashes at the extreme edges
@@ -36,6 +33,13 @@ def main():
             if my_error > worst_error:
                 worst_error = my_error
         spamwriter.writerow(my_row)
+
+    spamwriter.writerow([])
+    spamwriter.writerow(["fudge factor",f"{get_fudge_factor()}"])
+    spamwriter.writerow(["sample points",f"{count**2}"])
+    spamwriter.writerow(["total error",f"{total_error}"])
+    spamwriter.writerow(["mean error",f"{total_error/(count**2)}"])
+    spamwriter.writerow(["worst error",f"{worst_error}"])
 
     print("===========================================")
     print(f"sample points: {count**2}")
