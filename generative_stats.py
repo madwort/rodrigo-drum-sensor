@@ -20,6 +20,7 @@ def main():
     corner = (-distance / 2) + 0.0001
     spacing = distance / count
     total_error = 0
+    worst_error = 0
     for x in range(count):
         my_row = []
         for y in range(count):
@@ -28,12 +29,15 @@ def main():
             )
             my_row.append(my_error)
             total_error += my_error
+            if my_error > worst_error:
+                worst_error = my_error
         spamwriter.writerow(my_row)
 
     print("===========================================")
     print(f"sample points: {count**2}")
     print(f"total error: {total_error}")
     print(f"mean error: {total_error/(count**2)}")
+    print(f"worst error: {worst_error}")
     print("===========================================")
 
 
