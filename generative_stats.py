@@ -43,7 +43,7 @@ def main():
     spamwriter.writerow(["fudge factor", f"{get_fudge_factor()}"])
     spamwriter.writerow(["sample points", f"{count**2}"])
     spamwriter.writerow(["mean error", f"{total_error/(count**2)}"])
-    spamwriter.writerow(["worst error",f"{worst_error}"])
+    spamwriter.writerow(["worst error", f"{worst_error}"])
 
     print("===========================================")
     print(f"fudge factor: {get_fudge_factor()}")
