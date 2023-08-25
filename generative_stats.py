@@ -57,7 +57,6 @@ def main():
     print("===========================================")
     print(f"fudge factor: {get_fudge_factor()}")
     print(f"sample points: {count**2}")
-    print(f"total error: {total_error}")
     print(f"mean error: {total_error/(count**2)}")
     print(f"worst error: {worst_error}")
     print("===========================================")
