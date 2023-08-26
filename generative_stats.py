@@ -19,8 +19,7 @@ def main():
 
     distance = 0.202
     count = 100
-    # TODO: remove fudge factor because it crashes at the extreme edges
-    corner = (-distance / 2) + 0.0001
+    corner = (-distance / 2)
     spacing = distance / count
     total_error = 0
     worst_error = 0
