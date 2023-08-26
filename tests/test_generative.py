@@ -110,4 +110,53 @@ def test_calculate_point_specific(distance, test_point):
     print(f"error: {error}")
     print("-------------------------------------------")
 
+
+def _generate_north_moving_positions(distances):
+    distance = distances[0]
+    test_positions = []
+    count = 7
+    # delta = sqrt(2) / 100
+    delta = 0.014142135624
+    for x in range(count):
+        test_positions.append((-delta * x, -delta * x))
+    return test_positions
+
+
+north_moving_positions = _generate_north_moving_positions(distance)
+
+
+@pytest.mark.parametrize("distance", distance)
+@pytest.mark.parametrize("test_point", north_moving_positions)
+def test_calculate_point_northmoving(distance, test_point):
+    speed = 82
+
+    #  in m
+    # distance = 0.202
+
+    # test_point = (0.05, 0.05)
+    time_deltas_samples = _generate_tdoa_from_point(test_point, speed, distance)
+
+    ptp = numpy.ptp(time_deltas_samples)
+    x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
+
+    error = _diagonal_distance((x, y), test_point)
+
+    print("-------------------------------------------")
+    print(f"test point: {test_point}")
+    print(f"time deltas: {time_deltas_samples}")
+    print(f"ptp: {ptp}")
+    print(f"calculated point: {x},{y}")
+    print(f"error: {error}")
+    print("-------------------------------------------")
+
+    min_delta = numpy.min(time_deltas_samples)
+    print(f"min delta: {min_delta}")
+    normalised_deltas = [(x - min_delta) for x in time_deltas_samples]
+    print(f"normalised deltas: {normalised_deltas}")
+
+    offset_deltas = []
+    for x in range(len(normalised_deltas)):
+        offset_deltas.append(normalised_deltas[(x+1)%len(normalised_deltas)] - normalised_deltas[x])
+    print(f"offset deltas: {offset_deltas}")
+
     assert False
