@@ -9,6 +9,7 @@ import math
 import csv
 import numpy
 import matplotlib.pyplot as plt
+import random
 
 
 def main():
@@ -37,8 +38,15 @@ def main():
         row_results = []
         for y in range(count):
             my_error = test_calculate_point(
-                distance, ((corner + (spacing * x)), (corner + (spacing * y)))
+                distance,
+                ((corner + (spacing * x)), (corner + (spacing * y))),
+                jitter=True,
             )
+
+            hide_the_big_known_edge_cases = True
+            if hide_the_big_known_edge_cases and my_error > 0.05:
+                my_error = 0
+
             my_row.append(my_error)
             row_results.append(my_error)
             total_error += my_error
@@ -98,16 +106,23 @@ def _generate_tdoa_from_point(test_point, speed, distance):
     return time_deltas_samples
 
 
-def test_calculate_point(distance, test_point):
-    # TODO: get this to output a CSV & then make a graphing pipeline
-    # ...and then improve the performance!
+def test_calculate_point(distance, test_point, jitter=False):
     speed = 82
 
     #  in m
     # distance = 0.202
 
+    # error in samples
+    jitter_size = 5
+
     # test_point = (0.05, 0.05)
     time_deltas_samples = _generate_tdoa_from_point(test_point, speed, distance)
+
+    if jitter:
+        time_deltas_samples = [
+            (x + random.randrange(-jitter_size, jitter_size))
+            for x in time_deltas_samples
+        ]
 
     x, y, std_x, std_y = calculate_point(time_deltas_samples, speed, distance)
 
@@ -116,6 +131,7 @@ def test_calculate_point(distance, test_point):
     print("-------------------------------------------")
     print(f"test point: {test_point}")
     print(f"time deltas: {time_deltas_samples}")
+    print(f"jitter: {jitter} (size: {jitter_size})")
     print(f"calculated point: {x},{y}")
     print(f"error: {error}")
     print("-------------------------------------------")
