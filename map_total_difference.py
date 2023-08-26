@@ -3,6 +3,7 @@ from drum_sensor.samples import convert_seconds_to_samples, convert_samples_to_s
 import csv
 import math
 import numpy
+import matplotlib.pyplot as plt
 
 
 def _diagonal_distance(p1, p2):
@@ -38,7 +39,7 @@ def main():
 
     speed = 82
     distance = 0.202
-    count = 20
+    count = 50
     # TODO: remove fudge factor because it crashes at the extreme edges
     corner = (-distance / 2) + 0.00001
     spacing = distance / count
@@ -48,8 +49,10 @@ def main():
     for y in range(count):
         header_row.append((corner + (spacing * y)))
     spamwriter.writerow(header_row)
+    results_array = []
 
     for x in range(count):
+        row_results = []
         my_row = [(corner + (spacing * x))]
         for y in range(count):
             point = ((corner + (spacing * x)), (corner + (spacing * y)))
@@ -57,7 +60,14 @@ def main():
             ptp_size = numpy.ptp(my_tdoa)
             print(f"{point} - {my_tdoa} - {convert_samples_to_seconds(ptp_size)}")
             my_row.append(convert_samples_to_seconds(ptp_size))
+            row_results.append(convert_samples_to_seconds(ptp_size))
         spamwriter.writerow(my_row)
+        results_array.append(row_results)
+
+    mynumpy = numpy.array(results_array)
+    fig, ax = plt.subplots()
+    ax.imshow(mynumpy)
+    plt.show()
 
 
 if __name__ == "__main__":
