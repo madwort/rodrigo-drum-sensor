@@ -18,6 +18,9 @@ def _calculate_params_crosscorrelate(td, speed, distance):
         time_diff = 0.00000001
     my_a = speed * time_diff / 2
     my_c = distance / 2
+    if my_a == my_c:
+        # another fudge factor so we don't get div by zero
+        my_a += 0.00000001
     return ((1 / my_a**2), (1 / (my_c**2 - my_a**2)))
 
 
