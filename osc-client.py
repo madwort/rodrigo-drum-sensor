@@ -1,5 +1,6 @@
 from pythonosc.udp_client import SimpleUDPClient
 
+
 def main():
     """simulate Max sending a set of time offsets"""
     ip = "127.0.0.1"

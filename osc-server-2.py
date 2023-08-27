@@ -17,6 +17,6 @@ def main():
     server = BlockingOSCUDPServer((ip, port), dispatcher)
     server.serve_forever()  # Blocks forever
 
+
 if __name__ == "__main__":
     main()
-

@@ -156,7 +156,9 @@ def test_calculate_point_northmoving(distance, test_point):
 
     offset_deltas = []
     for x in range(len(normalised_deltas)):
-        offset_deltas.append(normalised_deltas[(x+1)%len(normalised_deltas)] - normalised_deltas[x])
+        offset_deltas.append(
+            normalised_deltas[(x + 1) % len(normalised_deltas)] - normalised_deltas[x]
+        )
     print(f"offset deltas: {offset_deltas}")
 
     assert False

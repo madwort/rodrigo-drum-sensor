@@ -5,6 +5,7 @@ from pythonosc.udp_client import SimpleUDPClient
 from drum_sensor.tdoa import calculate_point_crosscorrelate
 from drum_sensor.quadrant import convert_cross_samples_absolute
 
+
 def main():
     """OSC Server to receive a set of time offsets & return a predicted set of coordinates"""
     dispatcher = Dispatcher()
@@ -50,4 +51,3 @@ def default_handler(address, *args):
 
 if __name__ == "__main__":
     main()
-
