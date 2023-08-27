@@ -1,2 +1,11 @@
 .venv/
 __pycache__/
+.DS_Store
+outputs/
+generative_stats_outputs/
+archives/
+
+# ignore these outputs
+# TODO: move to outputs/
+error.csv
+mapping.csv
