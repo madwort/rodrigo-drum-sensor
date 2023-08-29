@@ -1,5 +1,6 @@
 import json
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import numpy
 
 
@@ -15,6 +16,7 @@ def main():
         y3 = []
         y4 = []
         y5 = []
+        c = []
 
         synth_data = [
             [0.0, 0.0, 0.0, 0.0],
@@ -56,8 +58,9 @@ def main():
             ],
         ]
 
-        for i in range(83):
-            block = (int(i) + 1) // 12
+        for i in range(84):
+            block = int(i) // 12
+            hit_weight = (int(i) % 12) // 4
 
             ptp1 = numpy.ptp(d["non_filtered"]["256_nonparabolic"][f"{i}"])
             ptp2 = numpy.ptp(d["non_filtered"]["512_nonparabolic"][f"{i}"])
@@ -65,8 +68,8 @@ def main():
             ptp4 = numpy.ptp(d["500hp"]["512_nonparabolic"][f"{i}"])
             ptp5 = numpy.ptp(synth_data[block])
 
-            print(f"{i} - {ptp1}")
-            if ((int(i) + 1) % 12) == 0:
+            print(f"{i} - {ptp1} - hit weight: {hit_weight}")
+            if (int(i) % 12) == 11:
                 print(" -- ")
 
             x.append(block)
@@ -75,17 +78,19 @@ def main():
             y3.append(ptp3)
             y4.append(ptp4)
             y5.append(ptp5)
+            c.append(hit_weight)
 
+        print(c)
         axs[0].set_title("non filtered 256 non parabolic")
-        axs[0].scatter(x, y1)
+        axs[0].scatter(x, y1, c=c)
         axs[1].set_title("non filtered 512 non parabolic")
-        axs[1].scatter(x, y2)
+        axs[1].scatter(x, y2, c=c)
         axs[2].set_title("120hp 512 non parabolic")
-        axs[2].scatter(x, y3)
+        axs[2].scatter(x, y3, c=c)
         axs[3].set_title("500hp 512 non parabolic")
-        axs[3].scatter(x, y4)
+        axs[3].scatter(x, y4, c=c)
         axs[4].set_title("synthetic")
-        axs[4].scatter(x, y5)
+        axs[4].scatter(x, y5, c=c)
 
         # all_limits = [axs[0].get_ylim(), axs[1].get_ylim(), axs[2].get_ylim(), axs[3].get_ylim()]
         # print(all_limits)
